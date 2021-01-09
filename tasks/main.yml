@@ -1,0 +1,17 @@
+---
+- name: Check if WP CLI exists
+  stat:
+    path: "{{ wp_cli_path }}"
+  register: wp_cli_exists
+
+- name: Install WP CLI
+  get_url:
+    url: "{{ wp_cli_url }}"
+    dest: "{{ wp_cli_path }}"
+    mode: 0755
+  when: not wp_cli_exists.stat.exists
+
+- name: Update WP CLI
+  command: "{{ wp_cli_path }} cli update --yes"
+  changed_when: false
+  when: wp_cli_exists.stat.exists

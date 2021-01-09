@@ -1,0 +1,22 @@
+---
+- name: converge
+  hosts: all
+  vars:
+    php_packages:
+      - php
+      - php-apcu
+      - php-json
+      - php-opcache
+    php_enable_webserver: false
+  roles:
+    - geerlingguy.php
+  pre_tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: true
+      when: ansible_facts['os_family'] == 'Debian'
+      changed_when: false
+  tasks:
+    - name: converge
+      include_role:
+        name: ansible-wp-cli

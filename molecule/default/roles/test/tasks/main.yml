@@ -1,0 +1,9 @@
+---
+- name: Run WP CLI command
+  command: wp --info
+  register: wp_cli_info
+
+- name: Check if WP CLI is intalled
+  assert:
+    that:
+      - wp_cli_info.stdout.find('WP-CLI version') > -1
