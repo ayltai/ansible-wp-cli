@@ -13,8 +13,8 @@ galaxy_info:
         - xenial
     - name: Debian
       versions:
-        - 10
-        - 9
+        - buster
+        - stretch
     - name: Fedora
       versions:
         - 30
